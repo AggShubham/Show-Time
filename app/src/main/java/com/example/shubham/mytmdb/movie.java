@@ -1,5 +1,6 @@
 package com.example.shubham.mytmdb;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
@@ -98,6 +99,7 @@ public class movie {
         private boolean adult;
         private String overview;
         private String release_date;
+        @ColumnInfo(name = "movie_type")
         private String type;
 
         public String getType() {

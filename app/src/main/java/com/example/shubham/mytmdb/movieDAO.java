@@ -34,7 +34,7 @@ public interface movieDAO {
 //    void updateMovie(movie movieobj);
 
 
-    @Query("SELECT * FROM Movies WHERE Type = :type ")
+    @Query("SELECT * FROM Movies WHERE movie_type = :type ")
     List<movie.ResultsBean> getAllMovies(String type);
 
 

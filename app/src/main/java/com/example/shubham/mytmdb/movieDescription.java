@@ -118,7 +118,7 @@ public class movieDescription extends AppCompatActivity {
         fetchdatafromnetwork();
         adapter =  new DescriptionAdapter(List,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),DividerItemDecoration.HORIZONTAL));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),DividerItemDecoration.HORIZONTAL));
         recyclerView.setItemAnimator( new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         recyclerView.setOnFlingListener(null);

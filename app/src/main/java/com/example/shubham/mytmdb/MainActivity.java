@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.main,mainFragment);
     }
 
+    private void setfragment(TVFragment tvFragment){
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.mainfragment,tvFragment).commit();
+    }
 
     @Override
     public void onBackPressed() {
@@ -99,9 +103,11 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.movie) {
             setfragment(new MainFragment());
-            Toast.makeText(this,"side bar movie clicked",Toast.LENGTH_LONG).show();
+//            Toast.makeText(this,"side bar movie clicked",Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.shows) {
+            setfragment(new TVFragment());
+            Toast.makeText(this,"side bar movie clicked",Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.about) {
 

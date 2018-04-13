@@ -10,23 +10,22 @@ import android.content.Context;
 /**
  * Created by Shubham on 05-04-2018.
  */
-@Database(entities = movie.ResultsBean.class , version = 2)
+@Database(entities = movie.ResultsBean.class , version = 1)
 public abstract class MovieDatabase extends RoomDatabase {
 
     private static MovieDatabase INSTANCE;
-
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE Movies "
-                    + " ADD COLUMN type");
-        }
-    };
+//
+//    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+//        @Override
+//        public void migrate(SupportSQLiteDatabase database) {
+//            database.execSQL("ALTER TABLE Movies "
+//                    + " ADD COLUMN type");
+//        }
+//    };
 
     public static MovieDatabase getINSTANCE(Context context){
         if (INSTANCE == null){
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),MovieDatabase.class,"movie_database")
-                    .addMigrations(MIGRATION_1_2)
                     .allowMainThreadQueries()
                     .build();
         }

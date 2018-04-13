@@ -27,28 +27,33 @@
                     android:layout_height="wrap_content"
                     android:padding="4dp"
                     android:text="Description"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
                     android:padding="4dp"
-                    android:textColor="@color/colorAccent"
+                    android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                    android:textColor="?android:attr/colorFocusedHighlight"
                     android:textSize="16sp" />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cast"
                     android:layout_marginLeft="4dp"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"
-                    android:textSize="20sp" />
+                    android:layout_marginTop="4dp"
+                    android:text="Cast"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclermoviecast"
@@ -59,7 +64,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:layout_marginLeft="4dp"

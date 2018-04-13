@@ -40,7 +40,7 @@ public class DescriptionAdapter extends RecyclerView.Adapter<DescriptionAdapter.
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         MovieCredits.CastBean resultsBean = beans.get(position);
         //    holder.description.setText(resultsBean.);
-        Picasso.get().load("http://image.tmdb.org/t/p/w780"+resultsBean.getProfile_path()).fit().into(holder.moviecredits);
+        Picasso.get().load("http://image.tmdb.org/t/p/w780"+resultsBean.getProfile_path()).centerCrop().fit().into(holder.moviecredits);
         holder.actorname.setText(resultsBean.getName());
 //         Picasso.get().load(IMAGE+resultsBean.getPoster_path()).fit().into(holder.poster);
     }

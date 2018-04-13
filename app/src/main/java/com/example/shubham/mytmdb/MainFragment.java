@@ -91,17 +91,34 @@ public class MainFragment extends Fragment {
         topmovies = new ArrayList<>();
         upcomingmovies = new ArrayList<>();
 
-        movieDatabase = MovieDatabase.getINSTANCE(getContext());
-        moviedao = movieDatabase.getmovieDAO();
-        type = "Upcoming";
-        upcomingmovies = (ArrayList<movie.ResultsBean>) moviedao.getAllMovies(type);
-        Toast.makeText(getContext(), "dao is running", Toast.LENGTH_SHORT).show();
+
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
+
+        movieDatabase = MovieDatabase.getINSTANCE(getContext());
+        moviedao = movieDatabase.getmovieDAO();
+        type = "Upcoming";
+        upcomingmovies = (ArrayList<movie.ResultsBean>) moviedao.getAllMovies(type);
+
+        movieDatabase = MovieDatabase.getINSTANCE(getContext());
+        moviedao = movieDatabase.getmovieDAO();
+        type = "Top Rated";
+        topmovies = (ArrayList<movie.ResultsBean>) moviedao.getAllMovies(type);
+
+        movieDatabase = MovieDatabase.getINSTANCE(getContext());
+        moviedao = movieDatabase.getmovieDAO();
+        type = "Popular";
+        popmovies = (ArrayList<movie.ResultsBean>) moviedao.getAllMovies(type);
+
+        movieDatabase = MovieDatabase.getINSTANCE(getContext());
+        moviedao = movieDatabase.getmovieDAO();
+        type = "Now Playing";
+        movies = (ArrayList<movie.ResultsBean>) moviedao.getAllMovies(type);
+//        Toast.makeText(getContext(), "dao is running", Toast.LENGTH_SHORT).show();
 
         fetchNowPlaying();
         recyclerAdapter = new NSMovieRecyclerAdapter(getContext(), movies, new NSMovieRecyclerAdapter.OnItemClickListener() {
@@ -113,7 +130,7 @@ public class MainFragment extends Fragment {
         });
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         fetchPopular();
@@ -127,7 +144,7 @@ public class MainFragment extends Fragment {
         });
         recyclerView1.setAdapter(recyclerAdapter);
         recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView1.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+//        recyclerView1.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
         fetchTopRated();
@@ -140,7 +157,7 @@ public class MainFragment extends Fragment {
         });
         recyclerView2.setAdapter(recyclerAdapter);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView2.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+//        recyclerView2.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
 
         fetchUpcomingMovies();
@@ -153,16 +170,14 @@ public class MainFragment extends Fragment {
         });
         recyclerView3.setAdapter(recyclerAdapter);
         recyclerView3.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView3.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+//        recyclerView3.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
         recyclerView3.setItemAnimator(new DefaultItemAnimator());
+
+
 
 
         return view;
     }
-
-//    public void onMovieSelected(movie.ResultsBean movie){
-//
-//    }
 
     private void fetchUpcomingMovies() {
         recyclerView2.setVisibility(View.GONE);
@@ -189,7 +204,8 @@ public class MainFragment extends Fragment {
                     recyclerAdapter.notifyDataSetChanged();
                     for (movie.ResultsBean resultsBean : movieslist.getResults())
                         moviedao.insertMovie(resultsBean);
-                } else {
+                }
+                else {
                     Toast.makeText(getContext(), "no movies fetched", Toast.LENGTH_SHORT).show();
                 }
                 recyclerView3.setVisibility(View.VISIBLE);
@@ -227,9 +243,12 @@ public class MainFragment extends Fragment {
                 if (movieslist != null) {
                     topmovies.clear();
                     topmovies.addAll(movieslist.getResults());
-
                     recyclerAdapter.notifyDataSetChanged();
-                } else {
+                    for (movie.ResultsBean resultsBean : movieslist.getResults())
+                        moviedao.insertMovie(resultsBean);
+                }
+
+                else {
                     Toast.makeText(getContext(), "no movies fetched", Toast.LENGTH_SHORT).show();
                 }
                 recyclerView2.setVisibility(View.VISIBLE);
@@ -269,7 +288,11 @@ public class MainFragment extends Fragment {
                     popmovies.addAll(movieslist.getResults());
                     Log.d("Message", movieslist.getResults().size() + "");
                     recyclerAdapter.notifyDataSetChanged();
-                } else {
+                    for (movie.ResultsBean resultsBean : movieslist.getResults())
+                        moviedao.insertMovie(resultsBean);
+                }
+
+                else {
                     Toast.makeText(getContext(), "no movies fetched", Toast.LENGTH_SHORT).show();
                 }
                 progressBar1.setVisibility(View.GONE);
@@ -324,14 +347,18 @@ public class MainFragment extends Fragment {
                     movie.ResultsBean resultsBean = movieslist.getResults().get(i);
                     resultsBean.setType("Now Playing");
                 }
-                Log.d("movie", movieslist + "");
+//                Log.d("movie", movieslist + "");
 
                 if (movieslist != null) {
                     movies.clear();
                     movies.addAll(movieslist.getResults());
-                    Log.d("Message", movieslist.getResults().size() + "");
+//                    Log.d("Message", movieslist.getResults().size() + "");
                     recyclerAdapter.notifyDataSetChanged();
-                } else {
+                    for (movie.ResultsBean resultsBean : movieslist.getResults())
+                        moviedao.insertMovie(resultsBean);
+                }
+
+                else {
                     Toast.makeText(getContext(), "no movies fetched", Toast.LENGTH_SHORT).show();
                 }
                 recyclerView.setVisibility(View.VISIBLE);

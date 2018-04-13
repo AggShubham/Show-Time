@@ -29,9 +29,21 @@ public interface TmdbApi {
     Call<MovieCredits> getcastMovies (@Path("movie_id") int id,
                                       @Query("api_key") String key);
 
-    @GET("3/movie/{movie_id}/videos")
+    @GET("movie/{movie_id}/videos")
     Call<TrailerClass> getmovietrailers(@Path("movie_id") int id,
                                          @Query("api_key") String key,
                                          @Query("language") String en);
+
+    @GET("tv/airing_today")
+    Call<TVClass> gettvshows(@Query("api_key") String apiKey);
+
+    @GET("tv/popular")
+    Call<TVClass> getpopshows(@Query("api_key") String apikey);
+
+    @GET("tv/top_rated")
+    Call<TVClass> gettopratedshows(@Query("api_key") String apikey);
+
+    @GET("tv/latest")
+    Call<TVClass> getupcomingshows(@Query("api_key") String apikey);
 
 }
