@@ -3,8 +3,11 @@ package com.example.shubham.mytmdb;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -29,10 +32,11 @@ import retrofit2.Response;
  */
 public class MainFragment extends Fragment {
 
-
+//    SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView, recyclerView1, recyclerView2, recyclerView3;
     ProgressBar progressBar, progressBar1, progressBar2, progressBar3;
     NSMovieRecyclerAdapter recyclerAdapter;
+    PopMovieRecyclerAdapter recyclerAdapter2;
     ArrayList<movie.ResultsBean> movies;
     ArrayList<movie.ResultsBean> popmovies;
     ArrayList<movie.ResultsBean> topmovies;
@@ -77,7 +81,7 @@ public class MainFragment extends Fragment {
 //                        .setAction("Action", null).show();
 //            }
 //        });
-
+//        swipeRefreshLayout = view.findViewById(R.id.swipe);
         recyclerView = view.findViewById(R.id.movielist);
         recyclerView1 = view.findViewById(R.id.popularmovielist);
         recyclerView2 = view.findViewById(R.id.topmovielist);
@@ -99,15 +103,89 @@ public class MainFragment extends Fragment {
 //            @Override
 //            public void onClick(View view) {
 
+        fetchFromDatabase();
+
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+                fetchFromInternet();
+//            }
+
+//        });
+
+        return view;
+    }
+
+            private void fetchFromInternet() {
+//                swipeRefreshLayout.setRefreshing(true);
+//                swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorsplash),getResources().getColor(R.color.coloryellow));
+                fetchNowPlaying();
+                recyclerAdapter = new NSMovieRecyclerAdapter(getContext(), movies, new NSMovieRecyclerAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        movie.ResultsBean movie = movies.get(position);
+                        mCallback.onMovieSelected(movie);
+                    }
+                });
+                recyclerView.setAdapter(recyclerAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//                recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                fetchPopular();
+                recyclerAdapter2 = new PopMovieRecyclerAdapter(getContext(), popmovies, new PopMovieRecyclerAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        movie.ResultsBean movie = popmovies.get(position);
+                        mCallback.onMovieSelected(movie);
+
+                    }
+                });
+                recyclerView1.setAdapter(recyclerAdapter2);
+                recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//        recyclerView1.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+                recyclerView1.setItemAnimator(new DefaultItemAnimator());
+
+                fetchTopRated();
+                recyclerAdapter = new NSMovieRecyclerAdapter(getContext(), topmovies, new NSMovieRecyclerAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        movie.ResultsBean movie = topmovies.get(position);
+                        mCallback.onMovieSelected(movie);
+                    }
+                });
+                recyclerView2.setAdapter(recyclerAdapter);
+                recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//        recyclerView2.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+                recyclerView2.setItemAnimator(new DefaultItemAnimator());
+
+                fetchUpcomingMovies();
+                recyclerAdapter2 = new PopMovieRecyclerAdapter(getContext(), upcomingmovies, new PopMovieRecyclerAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        movie.ResultsBean movie = upcomingmovies.get(position);
+                        mCallback.onMovieSelected(movie);
+                    }
+                });
+                recyclerView3.setAdapter(recyclerAdapter2);
+                recyclerView3.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//        recyclerView3.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+                recyclerView3.setItemAnimator(new DefaultItemAnimator());
+//               swipeRefreshLayout.setRefreshing(false);
+            }
+
+    private void fetchFromDatabase() {
         movieDatabase = MovieDatabase.getINSTANCE(getContext());
         moviedao = movieDatabase.getmovieDAO();
         type = "Upcoming";
         upcomingmovies = (ArrayList<movie.ResultsBean>) moviedao.getAllMovies(type);
+        Log.d("up",upcomingmovies+"");
 
         movieDatabase = MovieDatabase.getINSTANCE(getContext());
         moviedao = movieDatabase.getmovieDAO();
         type = "Top Rated";
         topmovies = (ArrayList<movie.ResultsBean>) moviedao.getAllMovies(type);
+        Log.d("up1",topmovies+"");
 
         movieDatabase = MovieDatabase.getINSTANCE(getContext());
         moviedao = movieDatabase.getmovieDAO();
@@ -119,68 +197,10 @@ public class MainFragment extends Fragment {
         type = "Now Playing";
         movies = (ArrayList<movie.ResultsBean>) moviedao.getAllMovies(type);
 //        Toast.makeText(getContext(), "dao is running", Toast.LENGTH_SHORT).show();
-
-        fetchNowPlaying();
-        recyclerAdapter = new NSMovieRecyclerAdapter(getContext(), movies, new NSMovieRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                movie.ResultsBean movie = movies.get(position);
-                mCallback.onMovieSelected(movie);
-            }
-        });
-        recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        fetchPopular();
-        recyclerAdapter = new NSMovieRecyclerAdapter(getContext(), popmovies, new NSMovieRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                movie.ResultsBean movie = popmovies.get(position);
-                mCallback.onMovieSelected(movie);
-
-            }
-        });
-        recyclerView1.setAdapter(recyclerAdapter);
-        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        recyclerView1.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
-        recyclerView1.setItemAnimator(new DefaultItemAnimator());
-
-        fetchTopRated();
-        recyclerAdapter = new NSMovieRecyclerAdapter(getContext(), topmovies, new NSMovieRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                movie.ResultsBean movie = topmovies.get(position);
-                mCallback.onMovieSelected(movie);
-            }
-        });
-        recyclerView2.setAdapter(recyclerAdapter);
-        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        recyclerView2.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
-        recyclerView2.setItemAnimator(new DefaultItemAnimator());
-
-        fetchUpcomingMovies();
-        recyclerAdapter = new NSMovieRecyclerAdapter(getContext(), upcomingmovies, new NSMovieRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                movie.ResultsBean movie = upcomingmovies.get(position);
-                mCallback.onMovieSelected(movie);
-            }
-        });
-        recyclerView3.setAdapter(recyclerAdapter);
-        recyclerView3.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        recyclerView3.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
-        recyclerView3.setItemAnimator(new DefaultItemAnimator());
-
-
-
-
-        return view;
     }
 
     private void fetchUpcomingMovies() {
-        recyclerView2.setVisibility(View.GONE);
+//        recyclerView2.setVisibility(View.GONE);
         progressBar3.setVisibility(View.VISIBLE);
 
         String apikey = "4838be8059e2c5739385001c29bd159c";
@@ -201,7 +221,7 @@ public class MainFragment extends Fragment {
                     upcomingmovies.clear();
                     upcomingmovies.addAll(movieslist.getResults());
                     Log.d("Message", movieslist.getResults().size() + "");
-                    recyclerAdapter.notifyDataSetChanged();
+                    recyclerAdapter2.notifyDataSetChanged();
                     for (movie.ResultsBean resultsBean : movieslist.getResults())
                         moviedao.insertMovie(resultsBean);
                 }
@@ -215,7 +235,7 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onFailure(Call<movie> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 recyclerView3.setVisibility(View.VISIBLE);
                 progressBar3.setVisibility(View.GONE);
             }
@@ -223,7 +243,7 @@ public class MainFragment extends Fragment {
     }
 
     private void fetchTopRated() {
-        recyclerView2.setVisibility(View.GONE);
+//        recyclerView2.setVisibility(View.GONE);
         progressBar2.setVisibility(View.VISIBLE);
 
         String apikey = "4838be8059e2c5739385001c29bd159c";
@@ -258,7 +278,7 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onFailure(Call<movie> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 recyclerView2.setVisibility(View.VISIBLE);
                 progressBar2.setVisibility(View.GONE);
             }
@@ -266,7 +286,7 @@ public class MainFragment extends Fragment {
     }
 
     private void fetchPopular() {
-        recyclerView1.setVisibility(View.GONE);
+//        recyclerView1.setVisibility(View.GONE);
         progressBar1.setVisibility(View.VISIBLE);
 
         String apikey = "4838be8059e2c5739385001c29bd159c";
@@ -287,7 +307,7 @@ public class MainFragment extends Fragment {
                     popmovies.clear();
                     popmovies.addAll(movieslist.getResults());
                     Log.d("Message", movieslist.getResults().size() + "");
-                    recyclerAdapter.notifyDataSetChanged();
+                    recyclerAdapter2.notifyDataSetChanged();
                     for (movie.ResultsBean resultsBean : movieslist.getResults())
                         moviedao.insertMovie(resultsBean);
                 }
@@ -301,7 +321,7 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onFailure(Call<movie> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 recyclerView1.setVisibility(View.VISIBLE);
                 progressBar1.setVisibility(View.GONE);
             }
@@ -368,12 +388,10 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onFailure(Call<movie> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Check your internet connection", Toast.LENGTH_LONG).show();
                 recyclerView.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
             }
         });
-
-
     }
 }

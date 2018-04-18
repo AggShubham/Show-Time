@@ -9,7 +9,7 @@
     tools:context="com.example.shubham.mytmdb.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <fragment
+    <FrameLayout
         android:name="com.example.shubham.mytmdb.MainFragment"
         android:id="@+id/mainfragment"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

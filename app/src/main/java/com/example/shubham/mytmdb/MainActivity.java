@@ -1,17 +1,11 @@
 package com.example.shubham.mytmdb;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
+import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,16 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,MainFragment.MovieSelectedCallback {
@@ -49,19 +34,22 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        setfragment(new MainFragment());
+        setFragment(new MainFragment());
 
     }
 
-    private void setfragment(MainFragment mainFragment) {
+    private void setFragment(Fragment fragment) {
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.main,mainFragment);
+        fragmentManager.beginTransaction()
+                .replace(R.id.mainfragment,fragment)
+                .setTransition(FragmentTransaction.TRANSIT_EXIT_MASK).commit();
+
     }
 
-    private void setfragment(TVFragment tvFragment){
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.mainfragment,tvFragment).commit();
-    }
+//    private void setFragment(TVFragment tvFragment){
+//        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.mainfragment,tvFragment).commit();
+//    }
 
     @Override
     public void onBackPressed() {
@@ -102,22 +90,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.movie) {
-            setfragment(new MainFragment());
+
+            setFragment(new MainFragment());
 //            Toast.makeText(this,"side bar movie clicked",Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.shows) {
-            setfragment(new TVFragment());
+            setFragment(new TVFragment());
             Toast.makeText(this,"side bar movie clicked",Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.about) {
 
-        } else if (id == R.id.nav_manage) {
+        }
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+         else if (id == R.id.fav) {
 
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

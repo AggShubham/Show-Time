@@ -65,6 +65,7 @@ public class NSMovieRecyclerAdapter extends RecyclerView.Adapter<NSMovieRecycler
         TextView title;
         ImageView movie_poster;
         TextView vote;
+        TextView genre;
         View itemView;
 
         public UserViewHolder(View itemView) {

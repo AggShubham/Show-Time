@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginTop="6dp"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="5dp"
+    app:cardBackgroundColor="@color/colorWhite">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imageViewTab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/textViewTab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="4dp"
+            android:text="Title"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/imageViewTab2"
+            app:layout_constraintStart_toStartOf="@id/imageViewTab2"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewTab2" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView2Tab2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="4dp"-->
+            <!--android:layout_marginRight="4dp"-->
+            <!--android:layout_marginTop="3dp"-->
+            <!--android:text="Vote"-->
+            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/imageView"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/textView"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/star" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/starTab2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="visible"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/imageView"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/imageView"-->
+            <!--app:srcCompat="@drawable/star" />-->
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.CardView>

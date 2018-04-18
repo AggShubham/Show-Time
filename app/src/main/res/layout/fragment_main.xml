@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.shubham.mytmdb.MainFragment">
 
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/swipe">-->
+
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:id="@+id/scrollView1"
@@ -22,10 +29,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Showing Now"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="16dp"
+                android:text="Now Showing"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorblack" />
 
             <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
@@ -34,6 +42,7 @@
 
                 <android.support.v7.widget.RecyclerView
                 android:paddingHorizontal="8dp"
+                    android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/movielist">
@@ -53,9 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Popular Movies"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorblack"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="16dp"/>
 
             <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
@@ -64,6 +74,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:paddingHorizontal="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/popularmovielist">
@@ -83,9 +94,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Top Rated Movies"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorblack"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="16dp"/>
 
             <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
@@ -93,6 +105,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:paddingHorizontal="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/topmovielist">
@@ -112,9 +125,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Upcoming Movies"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorblack"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="16dp"/>
 
             <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
@@ -122,6 +136,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:paddingHorizontal="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/upcomingmovielist">
@@ -138,6 +153,6 @@
             </android.support.design.widget.CoordinatorLayout>
         </LinearLayout>
 
-    </ScrollView>>
+    </ScrollView>
 
 </FrameLayout>

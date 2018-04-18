@@ -102,6 +102,34 @@ public class movie {
         @ColumnInfo(name = "movie_type")
         private String type;
 
+        public String getPoptype() {
+            return poptype;
+        }
+
+        public void setPoptype(String poptype) {
+            this.poptype = poptype;
+        }
+
+        public String getToptype() {
+            return toptype;
+        }
+
+        public void setToptype(String toptype) {
+            this.toptype = toptype;
+        }
+
+        public String getUptype() {
+            return uptype;
+        }
+
+        public void setUptype(String uptype) {
+            this.uptype = uptype;
+        }
+
+        private String poptype;
+        private String toptype;
+        private String uptype;
+
         public String getType() {
             return type;
         }

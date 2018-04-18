@@ -6,4 +6,9 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="cardBackgroundColor">#424242</color>
     <color name="background">#424242</color>
+    <color name="colorsplash">#ea0918</color>
+    <color name="coloryellow">#FFFAFA07</color>
+    <color name="colortop">#4db6ac</color>
+    <color name="colortopdark">#368079</color>
+    <color name="colorblack">#000000</color>
 </resources>
