@@ -1,6 +1,8 @@
 package com.example.shubham.mytmdb;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -26,11 +28,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class movieDescription extends AppCompatActivity {
+public class movieDescription extends AppCompatActivity implements trailerAdapter.ontrailerclickListener{
 
     CollapsingToolbarLayout layout;
     RecyclerView recyclerView;
     List<MovieCredits.CastBean>List;
+
+    BroadcastReceiver broadcastReceiver;
 
     DescriptionAdapter adapter;
     ImageView poster;
@@ -155,12 +159,18 @@ public class movieDescription extends AppCompatActivity {
 
     }
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+    @Override
+    public void ontrailerClick(int position) {
+//        Intent intent = new Intent(this,VideoPlayer.class);
+//        TrailerClass.ResultsBean bean = trailerslist.get(position);
+//        intent.putExtra("video_id",bean.getKey());
+//        startActivity(intent);
+        Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        TrailerClass.ResultsBean bean = trailerslist.get(position);
+        intent.setData(Uri.parse("https://www.youtube.com/watch?v=" + bean.getKey()+ "&feature=youtu.be"));
+
+        startActivity(intent);
+    }
 }

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ public class trailerAdapter extends RecyclerView.Adapter<trailerAdapter.TrailerH
     List<TrailerClass.ResultsBean> list;
     Context context;
     ontrailerclickListener listener;
+    public static final String YOUTUBE_THUMBNAIL ="https://img.youtube.com/vi/";
     interface ontrailerclickListener{
         void ontrailerClick(int position);
     }
@@ -39,15 +42,16 @@ public class trailerAdapter extends RecyclerView.Adapter<trailerAdapter.TrailerH
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final TrailerHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull TrailerHolder holder, final int position) {
         TrailerClass.ResultsBean resultsBean =  list.get(position);
         holder.name.setText(resultsBean.getName());
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.ontrailerClick(holder.getAdapterPosition());
-            }
-        });
+        Picasso.get().load(YOUTUBE_THUMBNAIL+ resultsBean.getKey()+"/0.jpg").fit().into(holder.imageView);
+//        holder.imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                listener.ontrailerClick(holder.getAdapterPosition());
+//            }
+//        });
     }
 
     @Override
@@ -55,16 +59,22 @@ public class trailerAdapter extends RecyclerView.Adapter<trailerAdapter.TrailerH
         return list.size();
     }
 
-    class TrailerHolder extends RecyclerView.ViewHolder{
+    class TrailerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         View itemView;
         ImageView imageView;
         TextView name;
         public TrailerHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
+
             imageView = itemView.findViewById(R.id.trailerimages);
             name = itemView.findViewById(R.id.trailername);
+            itemView.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View v) {
+            listener.ontrailerClick(getAdapterPosition());
         }
     }
 

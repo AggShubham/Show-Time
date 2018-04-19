@@ -46,7 +46,8 @@ public class NSMovieRecyclerAdapter extends RecyclerView.Adapter<NSMovieRecycler
         movie.ResultsBean movie = movies.get(position);
         holder.title.setText(movie.getOriginal_title());
         holder.vote.setText( movie.getVote_average()+"");
-        Picasso.get().load("http://image.tmdb.org/t/p/w780"+movie.getBackdrop_path()).into(holder.movie_poster);
+        Picasso.get().load("http://image.tmdb.org/t/p/w780"+movie.getBackdrop_path())
+                .into(holder.movie_poster);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
