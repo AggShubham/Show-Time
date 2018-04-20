@@ -1,24 +1,26 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shubham.mytmdb.Adapters.DescriptionAdapter;
+import com.example.shubham.mytmdb.Adapters.trailerAdapter;
+import com.example.shubham.mytmdb.R;
+import com.example.shubham.mytmdb.Retrofit.ApiClient.ApiClient;
+import com.example.shubham.mytmdb.Retrofit.ResponseModels.MovieCredits;
+import com.example.shubham.mytmdb.Retrofit.ResponseModels.TrailerClassModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,20 +30,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class movieDescription extends AppCompatActivity implements trailerAdapter.ontrailerclickListener{
+public class MovieDescriptionActivity extends AppCompatActivity implements com.example.shubham.mytmdb.Adapters.trailerAdapter.ontrailerclickListener {
 
     CollapsingToolbarLayout layout;
     RecyclerView recyclerView;
-    List<MovieCredits.CastBean>List;
-
-    BroadcastReceiver broadcastReceiver;
+    List<MovieCredits.CastBean> List;
 
     DescriptionAdapter adapter;
     ImageView poster;
     ImageView backdrop;
     TextView description;
     int b;
-    List<TrailerClass.ResultsBean> trailerslist;
+    List<TrailerClassModel.ResultsBean> trailerslist;
     RecyclerView trailerrecycler;
     trailerAdapter trailerAdapter;
 
@@ -59,42 +59,53 @@ public class movieDescription extends AppCompatActivity implements trailerAdapte
 //        swipeRefreshLayout = findViewById(R.id.descriptionswipe);
         Intent intent = getIntent();
         String a = intent.getStringExtra("moviename");
-        b = intent.getIntExtra("movieid",-1);
+        b = intent.getIntExtra("movieid", -1);
         String c = intent.getStringExtra("movieposter");
-        String d =  intent.getStringExtra("moviebackdrop");
-        String desc =intent.getStringExtra("description");
-        Picasso.get().load("http://image.tmdb.org/t/p/w780"+c).into(this.poster);
-        Picasso.get().load("http://image.tmdb.org/t/p/w780"+d).fit().into(this.backdrop);
+        String d = intent.getStringExtra("moviebackdrop");
+        String desc = intent.getStringExtra("description");
+        Picasso.get().load("http://image.tmdb.org/t/p/w780" + c).into(this.poster);
+        Picasso.get().load("http://image.tmdb.org/t/p/w780" + d).fit().into(this.backdrop);
         description.setText(desc);
-        layout.setExpandedTitleGravity(Gravity.RIGHT|Gravity.BOTTOM);
+        layout.setExpandedTitleGravity(Gravity.RIGHT | Gravity.BOTTOM);
         layout.setExpandedTitleMarginStart(15);
         layout.setTitle(a);
         createfornowplaying();
-        createformovietrailers();
+        createForMovieTrailers();
     }
 
-    private void createformovietrailers() {
+    private void createForMovieTrailers() {
         trailerslist = new ArrayList<>();
         trailerrecycler = findViewById(R.id.recycleryoutube);
-        fetchdatafromyoutube();
+        fetchDataFromYoutube();
         trailerAdapter = new trailerAdapter(trailerslist, this, new trailerAdapter.ontrailerclickListener() {
             @Override
             public void ontrailerClick(int position) {
+//                Intent intent = new Intent(MovieDescriptionActivity.this,VideoPlayerActivity.class);
+//              TrailerClassModel.ResultsBean bean = trailerslist.get(position);
+//              intent.putExtra("video_id",bean.getKey());
+//              startActivity(intent);
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                TrailerClassModel.ResultsBean bean = trailerslist.get(position);
+                intent.setData(Uri.parse("https://www.youtube.com/watch?v=" + bean.getKey() + "&feature=youtu.be"));
 
+                startActivity(intent);
+
+//                Toast.makeText(MovieDescriptionActivity.this, "HELLO BRo", Toast.LENGTH_SHORT).show();
             }
         });
-        trailerrecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        trailerrecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         trailerrecycler.setAdapter(trailerAdapter);
         trailerrecycler.setOnFlingListener(null);
     }
 
-    private void fetchdatafromyoutube() {
-        Call<TrailerClass> tvClassCall = ApiClient.getInstance().getTmdbApiApi().getmovietrailers(b,"4838be8059e2c5739385001c29bd159c","en-US");
-        tvClassCall.enqueue(new Callback<TrailerClass>() {
+    private void fetchDataFromYoutube() {
+        Call<TrailerClassModel> tvClassCall = ApiClient.getInstance().getTmdbApiApi().getmovietrailers(b, "4838be8059e2c5739385001c29bd159c", "en-US");
+        tvClassCall.enqueue(new Callback<TrailerClassModel>() {
             @Override
-            public void onResponse(Call<TrailerClass> call, Response<TrailerClass> response) {
-                if(response.body()!=null) {
-                    TrailerClass trailersClass = response.body();
+            public void onResponse(Call<TrailerClassModel> call, Response<TrailerClassModel> response) {
+                if (response.body() != null) {
+                    TrailerClassModel trailersClass = response.body();
                     trailerslist.clear();
                     trailerslist.addAll(trailersClass.getResults());
                     trailerAdapter.notifyDataSetChanged();
@@ -103,7 +114,7 @@ public class movieDescription extends AppCompatActivity implements trailerAdapte
             }
 
             @Override
-            public void onFailure(Call<TrailerClass> call, Throwable t) {
+            public void onFailure(Call<TrailerClassModel> call, Throwable t) {
 
             }
         });
@@ -120,10 +131,10 @@ public class movieDescription extends AppCompatActivity implements trailerAdapte
 //              List<Nowplaying.ResultsBean> list =movieDao.getnowplaing();
 
         fetchdatafromnetwork();
-        adapter =  new DescriptionAdapter(List,this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+        adapter = new DescriptionAdapter(List, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 //        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),DividerItemDecoration.HORIZONTAL));
-        recyclerView.setItemAnimator( new DefaultItemAnimator());
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         recyclerView.setOnFlingListener(null);
 
@@ -137,7 +148,7 @@ public class movieDescription extends AppCompatActivity implements trailerAdapte
 
     private void fetchdatafromnetwork() {
 
-        Call<MovieCredits> nowplayingCall = ApiClient.getInstance().getTmdbApiApi().getcastMovies(b,"4838be8059e2c5739385001c29bd159c");
+        Call<MovieCredits> nowplayingCall = ApiClient.getInstance().getTmdbApiApi().getcastMovies(b, "4838be8059e2c5739385001c29bd159c");
         nowplayingCall.enqueue(new Callback<MovieCredits>() {
             @Override
             public void onResponse(Call<MovieCredits> call, Response<MovieCredits> response) {
@@ -150,27 +161,17 @@ public class movieDescription extends AppCompatActivity implements trailerAdapte
                 }
 
             }
+
             @Override
             public void onFailure(Call<MovieCredits> call, Throwable t) {
-                Toast.makeText(movieDescription.this, "fail to load the activity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MovieDescriptionActivity.this, "fail to load the activity", Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 
     @Override
     public void ontrailerClick(int position) {
-//        Intent intent = new Intent(this,VideoPlayer.class);
-//        TrailerClass.ResultsBean bean = trailerslist.get(position);
-//        intent.putExtra("video_id",bean.getKey());
-//        startActivity(intent);
-        Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        TrailerClass.ResultsBean bean = trailerslist.get(position);
-        intent.setData(Uri.parse("https://www.youtube.com/watch?v=" + bean.getKey()+ "&feature=youtu.be"));
 
-        startActivity(intent);
     }
 }

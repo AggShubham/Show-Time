@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.shubham.mytmdb">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,13 +8,12 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/showtime"
-        android:label="ShowTime"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:name=".Activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".movieDescription"
+            android:name=".Activities.MovieDescriptionActivity"
             android:label="@string/title_activity_movie_description"
             android:theme="@style/AppTheme.NoActionBar">
 

@@ -1,4 +1,4 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Retrofit.ResponseModels;
 
 import java.util.ArrayList;
 import java.util.List;

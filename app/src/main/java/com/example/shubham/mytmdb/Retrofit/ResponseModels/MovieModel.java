@@ -1,4 +1,4 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Retrofit.ResponseModels;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -12,12 +12,12 @@ import java.util.List;
  * Created by Shubham on 24-03-2018.
  */
 
-public class movie {
+public class MovieModel {
     private int page;
     private int total_results;
     private DatesBean dates;
     private int total_pages;
-    private List<ResultsBean> results;
+    public List<ResultsBean> results;
 
     public int getPage() {
         return page;
@@ -100,7 +100,7 @@ public class movie {
         private String overview;
         private String release_date;
         @ColumnInfo(name = "movie_type")
-        private String type;
+        public String type;
 
         public String getPoptype() {
             return poptype;
@@ -244,12 +244,5 @@ public class movie {
             this.release_date = release_date;
         }
 
-//        public List<Integer> getGenre_ids() {
-//            return genre_ids;
-//        }
-//
-//        public void setGenre_ids(List<Integer> genre_ids) {
-//            this.genre_ids = genre_ids;
-//        }
     }
 }

@@ -1,9 +1,10 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.shubham.mytmdb.R;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -14,11 +15,11 @@ import com.google.android.youtube.player.YouTubePlayerView;
  * Created by Shubham on 18-04-2018.
  */
 
-public class VideoPlayer extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener{
+public class VideoPlayerActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener{
     private static final int RECOVERY_REQUEST = 1;
     private YouTubePlayerView youTubeView;
     String video= "";
-    public static final String YOUTUBE_API_KEY = "";
+    public static final String YOUTUBE_API_KEY = "hw_HpTI_Wkw";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,16 +1,16 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Dao;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
+
+import com.example.shubham.mytmdb.Retrofit.ResponseModels.MovieModel;
 
 /**
  * Created by Shubham on 05-04-2018.
  */
-@Database(entities = movie.ResultsBean.class , version = 1)
+@Database(entities = MovieModel.ResultsBean.class , version = 1)
 public abstract class MovieDatabase extends RoomDatabase {
 
     private static MovieDatabase INSTANCE;
@@ -32,5 +32,5 @@ public abstract class MovieDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    abstract movieDAO getmovieDAO();
+    public abstract MovieDAO getmovieDAO();
 }

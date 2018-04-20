@@ -1,14 +1,15 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.shubham.mytmdb.Retrofit.ResponseModels.MovieModel;
+import com.example.shubham.mytmdb.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -18,16 +19,16 @@ import java.util.ArrayList;
  */
 
 public class NSMovieRecyclerAdapter extends RecyclerView.Adapter<NSMovieRecyclerAdapter.UserViewHolder> {
-    interface OnItemClickListener {
+    public interface OnItemClickListener {
 
         void onItemClick(int position);
     }
 
-    ArrayList<movie.ResultsBean> movies;
+    ArrayList<MovieModel.ResultsBean> movies;
     Context context;
     OnItemClickListener listener;
 
-    public NSMovieRecyclerAdapter(Context context, ArrayList<movie.ResultsBean> movies,OnItemClickListener listener){
+    public NSMovieRecyclerAdapter(Context context, ArrayList<MovieModel.ResultsBean> movies, OnItemClickListener listener){
         this.movies = movies;
         this.context = context;
         this.listener = listener;
@@ -43,7 +44,7 @@ public class NSMovieRecyclerAdapter extends RecyclerView.Adapter<NSMovieRecycler
 
     @Override
     public void onBindViewHolder(final UserViewHolder holder, int position) {
-        movie.ResultsBean movie = movies.get(position);
+        MovieModel.ResultsBean movie = movies.get(position);
         holder.title.setText(movie.getOriginal_title());
         holder.vote.setText( movie.getVote_average()+"");
         Picasso.get().load("http://image.tmdb.org/t/p/w780"+movie.getBackdrop_path())

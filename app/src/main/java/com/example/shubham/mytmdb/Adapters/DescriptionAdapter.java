@@ -1,4 +1,4 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.shubham.mytmdb.Retrofit.ResponseModels.MovieCredits;
+import com.example.shubham.mytmdb.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

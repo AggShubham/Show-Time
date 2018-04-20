@@ -1,4 +1,6 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Retrofit.ApiClient;
+
+import com.example.shubham.mytmdb.Retrofit.ApiInterface.TmdbApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

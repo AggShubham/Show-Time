@@ -1,4 +1,4 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.shubham.mytmdb.Retrofit.ResponseModels.MovieModel;
+import com.example.shubham.mytmdb.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -17,16 +19,16 @@ import java.util.ArrayList;
  */
 
     public class PopMovieRecyclerAdapter extends RecyclerView.Adapter<PopMovieRecyclerAdapter.UserViewHolder> {
-        interface OnItemClickListener {
+        public interface OnItemClickListener {
 
             void onItemClick(int position);
         }
 
-        ArrayList<movie.ResultsBean> movies;
+        ArrayList<MovieModel.ResultsBean> movies;
         Context context;
         PopMovieRecyclerAdapter.OnItemClickListener listener;
 
-        public PopMovieRecyclerAdapter(Context context, ArrayList<movie.ResultsBean> movies, PopMovieRecyclerAdapter.OnItemClickListener listener){
+        public PopMovieRecyclerAdapter(Context context, ArrayList<MovieModel.ResultsBean> movies, PopMovieRecyclerAdapter.OnItemClickListener listener){
             this.movies = movies;
             this.context = context;
             this.listener = listener;
@@ -42,9 +44,9 @@ import java.util.ArrayList;
 
         @Override
         public void onBindViewHolder(final PopMovieRecyclerAdapter.UserViewHolder holder, int position) {
-            movie.ResultsBean movie = movies.get(position);
+            MovieModel.ResultsBean movie = movies.get(position);
             holder.title.setText(movie.getOriginal_title());
-//            holder.vote.setText( movie.getVote_average()+"");
+//            holder.vote.setText( MovieModel.getVote_average()+"");
             Picasso.get().load("http://image.tmdb.org/t/p/w342"+movie.getPoster_path()).into(holder.movie_poster);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,10 +1,9 @@
-package com.example.shubham.mytmdb;
+package com.example.shubham.mytmdb.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.shubham.mytmdb.Fragments.MainFragment;
+import com.example.shubham.mytmdb.R;
+import com.example.shubham.mytmdb.Retrofit.ResponseModels.MovieModel;
+import com.example.shubham.mytmdb.Fragments.TVFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,MainFragment.MovieSelectedCallback {
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment) {
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.mainfragment,fragment)
@@ -92,11 +96,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.movie) {
 
             setFragment(new MainFragment());
-//            Toast.makeText(this,"side bar movie clicked",Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.shows) {
             setFragment(new TVFragment());
-            Toast.makeText(this,"side bar movie clicked",Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.about) {
 
@@ -113,8 +115,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onMovieSelected(movie.ResultsBean movie) {
-        Intent intent = new Intent(this,movieDescription.class);
+    public void onMovieSelected(MovieModel.ResultsBean movie) {
+        Intent intent = new Intent(this,MovieDescriptionActivity.class);
         int a = movie.getId();
         String name = movie.getTitle().toString();
         intent.putExtra("movieid",a);
