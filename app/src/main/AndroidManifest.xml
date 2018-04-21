@@ -8,9 +8,9 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/showtime"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.MainActivity"
@@ -26,15 +26,24 @@
             android:label="@string/title_activity_movie_description"
             android:theme="@style/AppTheme.NoActionBar">
 
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
 
-                <!--<data android:scheme="plain text" />-->
 
-                <!--<category android:name="android.intent.category.BROWSABLE" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
+            <!-- <data android:scheme="plain text" /> -->
+
+
+            <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- </intent-filter> -->
         </activity>
+        <activity
+            android:name=".Activities.TvDescriptionActivity"
+            android:label="@string/title_activity_tv_description"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.SearchActvity" />
     </application>
+
+
 
 </manifest>

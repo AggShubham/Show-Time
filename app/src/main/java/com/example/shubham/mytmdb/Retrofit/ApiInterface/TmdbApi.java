@@ -2,6 +2,7 @@ package com.example.shubham.mytmdb.Retrofit.ApiInterface;
 
 import com.example.shubham.mytmdb.Retrofit.ResponseModels.MovieCredits;
 import com.example.shubham.mytmdb.Retrofit.ResponseModels.MovieModel;
+import com.example.shubham.mytmdb.Retrofit.ResponseModels.SearchClass;
 import com.example.shubham.mytmdb.Retrofit.ResponseModels.TVClass;
 import com.example.shubham.mytmdb.Retrofit.ResponseModels.TrailerClassModel;
 
@@ -46,4 +47,11 @@ public interface TmdbApi {
     @GET("tv/top_rated")
     Call<TVClass> gettopratedshows(@Query("api_key") String apikey);
 
-}
+    @GET("search/multi")
+    Call<SearchClass> getsearchall (@Query("api_key") String key,
+                                    @Query("language") String en,
+                                    @Query("query") String query,
+                                    @Query("page") int page,
+                                    @Query("include_adult") boolean a);
+
+    }

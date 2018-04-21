@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.shubham.mytmdb.Activities.TvDescriptionActivity"
+    tools:showIn="@layout/activity_tv_description">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="Description"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvdescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="16sp" />
+
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="4dp"-->
+                    <!--android:layout_marginTop="4dp"-->
+                    <!--android:text="Cast"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/recyclertvcast"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+                <!--</android.support.v7.widget.RecyclerView>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:layout_marginVertical="16dp"-->
+                    <!--android:layout_marginLeft="4dp"-->
+                    <!--android:text="Trailers"/>-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/recyclertvyoutube"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_width="match_parent">-->
+                <!--</android.support.v7.widget.RecyclerView>-->
+
+            </LinearLayout>
+
+        </TableLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.v4.widget.NestedScrollView>
